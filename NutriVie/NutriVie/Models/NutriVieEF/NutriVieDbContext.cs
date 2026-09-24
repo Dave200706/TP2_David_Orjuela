@@ -34,7 +34,7 @@ namespace NutriVie.Models.NutriVieEF
                     new Recette() { Id = 6, Nom = "Riz jaune", Description = "accompagnement traditionnel en Afrique du Sud.", TempsPreparation = 10, TempsCuisson = 25, Image = "Riz_jaune.jpg", CategorieId = 3 },
                     new Recette() { Id = 7, Nom = "Lasagne", Description = "Pâtes gratinées avec viande et sauce tomate.", TempsPreparation = 45, TempsCuisson = 60, Image = "Lasagne.jpg", CategorieId = 4 },
                     new Recette() { Id = 8, Nom = "Risotto aux champignons", Description = "Riz crémeux italien aux champignons.", TempsPreparation = 15, TempsCuisson = 35, Image = "Risotto_Champignons.jpg", CategorieId = 4 },
-                    new Recette() { Id = 9, Nom = "Couscous yoyal", Description = "Semoule servie avec légumes et viandes variées.", TempsPreparation = 40, TempsCuisson = 90, Image = "Couscous_royal.jpg", CategorieId = 5 },
+                    new Recette() { Id = 9, Nom = "Couscous Royal", Description = "Semoule servie avec légumes et viandes variées.", TempsPreparation = 40, TempsCuisson = 90, Image = "Couscous_royal.jpg", CategorieId = 5 },
                     new Recette() { Id = 10, Nom = "Shawarma", Description = "Viande marinée grillée servie dans un pain pita.", TempsPreparation = 25, TempsCuisson = 30, Image = "Shawarma.jpg", CategorieId = 5 });
         }
         
