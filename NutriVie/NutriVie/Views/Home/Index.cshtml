@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<NutriVie.Models.Service>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -31,8 +32,17 @@
 
         <!-- LES SERVICES -->
         <div class="cards-services">
-
-            <!-- Service 1 - -->
+            @foreach(var item in Model)
+            {
+                <div class="service-card">
+                    <div class="card_media"></div>
+                    <div class="card_content">
+                        <h4>@item.NomDuService</h4>
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            }
+           @*  <!-- Service 1 - -->
             <div class="service-card">
                 <div class="card_media"></div>
                 <div class="card_content">
@@ -57,7 +67,7 @@
                     <h4>Conseils d'Experts</h4>
                     <p>Des articles et guides sur la nutrition et le bien-être.</p>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
 </section>
