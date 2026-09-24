@@ -3,16 +3,15 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace NutriVie.Models
 {
-    public class Service
+    public class Categorie
     {
-        
+        [Key]
         public int Id { get; set; }
-        
-        public string NomDuService { get; set; }
 
-        public string Description { get; set; }
+        public string Nom { get; set; }
 
-        
+        [ValidateNever]
+        public List<Recette> Recette { get; set; }
 
     }
 }
