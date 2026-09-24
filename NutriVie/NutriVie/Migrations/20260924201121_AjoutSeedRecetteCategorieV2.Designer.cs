@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NutriVie.Models.NutriVieEF;
 
@@ -10,9 +11,11 @@ using NutriVie.Models.NutriVieEF;
 namespace NutriVie.Migrations
 {
     [DbContext(typeof(NutriVieDbContext))]
-    partial class NutriVieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260924201121_AjoutSeedRecetteCategorieV2")]
+    partial class AjoutSeedRecetteCategorieV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

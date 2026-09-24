@@ -8,6 +8,9 @@ namespace NutriVie.Models.NutriVieEF
         {
 
         }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Categorie> Categories { get; set; }
+        public DbSet<Recette> Recettes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Service>().HasData(
@@ -34,7 +37,8 @@ namespace NutriVie.Models.NutriVieEF
                     new Recette() { Id = 9, Nom = "Couscous yoyal", Description = "Semoule servie avec légumes et viandes variées.", TempsPreparation = 40, TempsCuisson = 90, Image = "Couscous_royal.jpg", CategorieId = 5 },
                     new Recette() { Id = 10, Nom = "Shawarma", Description = "Viande marinée grillée servie dans un pain pita.", TempsPreparation = 25, TempsCuisson = 30, Image = "Shawarma.jpg", CategorieId = 5 });
         }
-        public DbSet<Service> Services { get; set; }
+        
+
 
     }
 }
