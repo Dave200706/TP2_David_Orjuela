@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NutriVie.Models;
 using NutriVie.Models.NutriVieEF;
@@ -16,7 +17,8 @@ public class RecetteController : Controller
     // GET: RECETTES
     public async Task<IActionResult> Index()    
     {
-        return View(await _context.Recettes.ToListAsync());
+
+        return View(await _context.Recettes.Include(r=>r.Categorie).OrderBy(r=>r.Categorie.Nom).ThenBy(r=>r.Nom).ToListAsync());
     }
 
     // GET: RECETTES/Details/5
@@ -27,7 +29,7 @@ public class RecetteController : Controller
             return NotFound();
         }
 
-        var recette = await _context.Recettes
+        var recette = await _context.Recettes.Include(r=>r.Categorie)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (recette == null)
         {
@@ -40,15 +42,21 @@ public class RecetteController : Controller
     // GET: RECETTES/Create
     public IActionResult Create()
     {
+        ViewData["CategorieId"] = new SelectList(
+            _context.Categories,
+            "Id",
+            "Nom"
+        );
+
         return View();
     }
 
     // POST: RECETTES/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Nom,Description,TempsPreparation,TempsCuisson,Image,CategorieId,Categorie")] Recette recette)
+    public async Task<IActionResult> Create(
+        [Bind("Id,Nom,Description,TempsPreparation,TempsCuisson,Image,CategorieId")]
+    Recette recette)
     {
         if (ModelState.IsValid)
         {
@@ -56,6 +64,14 @@ public class RecetteController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        ViewData["CategorieId"] = new SelectList(
+            _context.Categories,
+            "Id",
+            "Nom",
+            recette.CategorieId
+        );
+
         return View(recette);
     }
 
@@ -68,19 +84,29 @@ public class RecetteController : Controller
         }
 
         var recette = await _context.Recettes.FindAsync(id);
+
         if (recette == null)
         {
             return NotFound();
         }
+
+        ViewData["CategorieId"] = new SelectList(
+            _context.Categories,
+            "Id",
+            "Nom",
+            recette.CategorieId
+        );
+
         return View(recette);
     }
 
     // POST: RECETTES/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, [Bind("Id,Nom,Description,TempsPreparation,TempsCuisson,Image,CategorieId,Categorie")] Recette recette)
+    public async Task<IActionResult> Edit(
+        int? id,
+        [Bind("Id,Nom,Description,TempsPreparation,TempsCuisson,Image,CategorieId")]
+    Recette recette)
     {
         if (id != recette.Id)
         {
@@ -105,8 +131,18 @@ public class RecetteController : Controller
                     throw;
                 }
             }
+
             return RedirectToAction(nameof(Index));
         }
+
+        // Important si le ModelState n'est pas valide
+        ViewData["CategorieId"] = new SelectList(
+            _context.Categories,
+            "Id",
+            "Nom",
+            recette.CategorieId
+        );
+
         return View(recette);
     }
 
@@ -118,7 +154,7 @@ public class RecetteController : Controller
             return NotFound();
         }
 
-        var recette = await _context.Recettes
+        var recette = await _context.Recettes.Include(r=>r.Categorie)
             .FirstOrDefaultAsync(m => m.Id == id);
         if (recette == null)
         {
