@@ -134,11 +134,23 @@ public class CategorieController : Controller
     public async Task<IActionResult> DeleteConfirmed(int? id)
     {
         var categorie = await _context.Categories.FindAsync(id);
+        
+        if (categorie == null)
+        {
+            return NotFound();
+
+        }
+        bool contientRecettes = await _context.Recettes.AnyAsync(r => r.CategorieId == id);
+        if (contientRecettes)
+        {
+            TempData["Erreure"] = "Impossible de supprimer cette catégorie, car elle est associé à une ou plusieurs recettes.";
+            return RedirectToAction(nameof(Index));
+        }
         if (categorie != null)
         {
             _context.Categories.Remove(categorie);
         }
-
+       
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
