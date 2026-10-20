@@ -19,16 +19,26 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderByDescending(c=>c.Nom))
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nom)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem =>item.Recette)
+                    @if (item.Recette != null)
+                    {
+                        @foreach(var recette in item.Recette.OrderBy(r => r.Nom))
+                        {
+                            <div>
+                                <a asp-controller="Recette" asp-action="Edit" asp-route-id="@recette.Id">@recette.Nom (@recette.TempsPreparation min)</a>
+                            </div>
+                        }
+                    }
                 </td>
                 <td>
+                
+                
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
