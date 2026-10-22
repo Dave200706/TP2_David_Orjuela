@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NutriVie.Models;
 using NutriVie.Models.NutriVieEF;
 
@@ -40,6 +41,7 @@ public class CategorieController : Controller
     // GET: CATEGORIES/Create
     public IActionResult Create()
     {
+        
         return View();
     }
 
@@ -50,6 +52,12 @@ public class CategorieController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id,Nom,Recette")] Categorie categorie)
     {
+        bool contientCategorie = await _context.Categories.AnyAsync(r=>r.Nom.ToUpper() == categorie.Nom.ToUpper());
+        if (contientCategorie)
+        {
+            TempData["Error"] = "Cette catégorie existe déjà";
+            return RedirectToAction(nameof(Create));
+        }
         if (ModelState.IsValid)
         {
             _context.Add(categorie);
@@ -113,6 +121,12 @@ public class CategorieController : Controller
     // GET: CATEGORIES/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
+        bool contientRecettes = await _context.Recettes.AnyAsync(r => r.CategorieId == id);
+        if (contientRecettes)
+        {
+
+            TempData["Error"] = "Vous ne pouvez pas supprimer cette catégorie parce qu'elle contient des recettes";
+        }
         if (id == null)
         {
             return NotFound();
@@ -124,6 +138,7 @@ public class CategorieController : Controller
         {
             return NotFound();
         }
+       
 
         return View(categorie);
     }
@@ -133,6 +148,7 @@ public class CategorieController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)
     {
+        
         var categorie = await _context.Categories.FindAsync(id);
         
         if (categorie == null)
@@ -140,17 +156,17 @@ public class CategorieController : Controller
             return NotFound();
 
         }
-        bool contientRecettes = await _context.Recettes.AnyAsync(r => r.CategorieId == id);
-        if (contientRecettes)
-        {
-            TempData["Erreure"] = "Impossible de supprimer cette catégorie, car elle est associé à une ou plusieurs recettes.";
-            return RedirectToAction(nameof(Index));
-        }
+        
         if (categorie != null)
         {
             _context.Categories.Remove(categorie);
         }
-       
+        bool contientRecettes = await _context.Recettes.AnyAsync(r => r.CategorieId == id);
+        if (contientRecettes)
+        {
+            TempData["Erreure"] = "Impossible de supprimer cette catégorie, car elle est associé à une ou plusieurs recettes.";
+            return RedirectToAction(nameof(Delete));
+        }
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
