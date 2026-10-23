@@ -16,10 +16,430 @@ namespace NutriVie.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.12")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("NutriVie.Models.Aliment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("CaloriesPour100g")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Aliments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CaloriesPour100g = 250.0,
+                            Nom = "Boeuf"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CaloriesPour100g = 85.0,
+                            Nom = "Vin rouge"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CaloriesPour100g = 41.0,
+                            Nom = "Carottes"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CaloriesPour100g = 40.0,
+                            Nom = "Oignons"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CaloriesPour100g = 541.0,
+                            Nom = "Bacon"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CaloriesPour100g = 155.0,
+                            Nom = "Oeufs"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CaloriesPour100g = 413.0,
+                            Nom = "Fromage gruyère"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CaloriesPour100g = 292.0,
+                            Nom = "Crème fraîche"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CaloriesPour100g = 165.0,
+                            Nom = "Poulet"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CaloriesPour100g = 35.0,
+                            Nom = "Sauce tomate"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CaloriesPour100g = 282.0,
+                            Nom = "Épices tikka"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CaloriesPour100g = 61.0,
+                            Nom = "Yogourt"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CaloriesPour100g = 717.0,
+                            Nom = "Beurre"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CaloriesPour100g = 29.0,
+                            Nom = "Citron"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CaloriesPour100g = 130.0,
+                            Nom = "Riz"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CaloriesPour100g = 354.0,
+                            Nom = "Curcuma"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CaloriesPour100g = 371.0,
+                            Nom = "Pâtes à lasagne"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CaloriesPour100g = 254.0,
+                            Nom = "Viande hachée"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CaloriesPour100g = 22.0,
+                            Nom = "Champignons"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CaloriesPour100g = 8.0,
+                            Nom = "Bouillon de poulet"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CaloriesPour100g = 360.0,
+                            Nom = "Semoule"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CaloriesPour100g = 17.0,
+                            Nom = "Courgettes"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CaloriesPour100g = 364.0,
+                            Nom = "Pois chiches"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CaloriesPour100g = 275.0,
+                            Nom = "Pain pita"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CaloriesPour100g = 595.0,
+                            Nom = "Tahini"
+                        });
+                });
+
+            modelBuilder.Entity("NutriVie.Models.AlimentRecette", b =>
+                {
+                    b.Property<int>("RecetteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AlimentId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Poids")
+                        .HasColumnType("float");
+
+                    b.HasKey("RecetteId", "AlimentId");
+
+                    b.HasIndex("AlimentId");
+
+                    b.ToTable("AlimentRecettes");
+
+                    b.HasData(
+                        new
+                        {
+                            RecetteId = 1,
+                            AlimentId = 1,
+                            Poids = 800.0
+                        },
+                        new
+                        {
+                            RecetteId = 1,
+                            AlimentId = 2,
+                            Poids = 500.0
+                        },
+                        new
+                        {
+                            RecetteId = 1,
+                            AlimentId = 3,
+                            Poids = 200.0
+                        },
+                        new
+                        {
+                            RecetteId = 1,
+                            AlimentId = 4,
+                            Poids = 150.0
+                        },
+                        new
+                        {
+                            RecetteId = 2,
+                            AlimentId = 5,
+                            Poids = 200.0
+                        },
+                        new
+                        {
+                            RecetteId = 2,
+                            AlimentId = 6,
+                            Poids = 3.0
+                        },
+                        new
+                        {
+                            RecetteId = 2,
+                            AlimentId = 7,
+                            Poids = 100.0
+                        },
+                        new
+                        {
+                            RecetteId = 2,
+                            AlimentId = 8,
+                            Poids = 200.0
+                        },
+                        new
+                        {
+                            RecetteId = 3,
+                            AlimentId = 9,
+                            Poids = 600.0
+                        },
+                        new
+                        {
+                            RecetteId = 3,
+                            AlimentId = 10,
+                            Poids = 300.0
+                        },
+                        new
+                        {
+                            RecetteId = 3,
+                            AlimentId = 11,
+                            Poids = 30.0
+                        },
+                        new
+                        {
+                            RecetteId = 3,
+                            AlimentId = 12,
+                            Poids = 150.0
+                        },
+                        new
+                        {
+                            RecetteId = 4,
+                            AlimentId = 9,
+                            Poids = 600.0
+                        },
+                        new
+                        {
+                            RecetteId = 4,
+                            AlimentId = 13,
+                            Poids = 80.0
+                        },
+                        new
+                        {
+                            RecetteId = 4,
+                            AlimentId = 10,
+                            Poids = 250.0
+                        },
+                        new
+                        {
+                            RecetteId = 4,
+                            AlimentId = 8,
+                            Poids = 100.0
+                        },
+                        new
+                        {
+                            RecetteId = 5,
+                            AlimentId = 9,
+                            Poids = 700.0
+                        },
+                        new
+                        {
+                            RecetteId = 5,
+                            AlimentId = 14,
+                            Poids = 2.0
+                        },
+                        new
+                        {
+                            RecetteId = 5,
+                            AlimentId = 4,
+                            Poids = 300.0
+                        },
+                        new
+                        {
+                            RecetteId = 6,
+                            AlimentId = 15,
+                            Poids = 400.0
+                        },
+                        new
+                        {
+                            RecetteId = 6,
+                            AlimentId = 16,
+                            Poids = 5.0
+                        },
+                        new
+                        {
+                            RecetteId = 6,
+                            AlimentId = 13,
+                            Poids = 30.0
+                        },
+                        new
+                        {
+                            RecetteId = 7,
+                            AlimentId = 17,
+                            Poids = 300.0
+                        },
+                        new
+                        {
+                            RecetteId = 7,
+                            AlimentId = 18,
+                            Poids = 500.0
+                        },
+                        new
+                        {
+                            RecetteId = 7,
+                            AlimentId = 10,
+                            Poids = 400.0
+                        },
+                        new
+                        {
+                            RecetteId = 7,
+                            AlimentId = 7,
+                            Poids = 150.0
+                        },
+                        new
+                        {
+                            RecetteId = 8,
+                            AlimentId = 15,
+                            Poids = 350.0
+                        },
+                        new
+                        {
+                            RecetteId = 8,
+                            AlimentId = 19,
+                            Poids = 300.0
+                        },
+                        new
+                        {
+                            RecetteId = 8,
+                            AlimentId = 20,
+                            Poids = 500.0
+                        },
+                        new
+                        {
+                            RecetteId = 8,
+                            AlimentId = 13,
+                            Poids = 50.0
+                        },
+                        new
+                        {
+                            RecetteId = 9,
+                            AlimentId = 21,
+                            Poids = 500.0
+                        },
+                        new
+                        {
+                            RecetteId = 9,
+                            AlimentId = 9,
+                            Poids = 300.0
+                        },
+                        new
+                        {
+                            RecetteId = 9,
+                            AlimentId = 22,
+                            Poids = 200.0
+                        },
+                        new
+                        {
+                            RecetteId = 9,
+                            AlimentId = 23,
+                            Poids = 150.0
+                        },
+                        new
+                        {
+                            RecetteId = 10,
+                            AlimentId = 9,
+                            Poids = 500.0
+                        },
+                        new
+                        {
+                            RecetteId = 10,
+                            AlimentId = 24,
+                            Poids = 2.0
+                        },
+                        new
+                        {
+                            RecetteId = 10,
+                            AlimentId = 25,
+                            Poids = 50.0
+                        },
+                        new
+                        {
+                            RecetteId = 10,
+                            AlimentId = 4,
+                            Poids = 100.0
+                        });
+                });
 
             modelBuilder.Entity("NutriVie.Models.Categorie", b =>
                 {
@@ -243,6 +663,25 @@ namespace NutriVie.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NutriVie.Models.AlimentRecette", b =>
+                {
+                    b.HasOne("NutriVie.Models.Aliment", "Aliment")
+                        .WithMany("AlimentRecette")
+                        .HasForeignKey("AlimentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NutriVie.Models.Recette", "Recette")
+                        .WithMany("AlimentRecette")
+                        .HasForeignKey("RecetteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Aliment");
+
+                    b.Navigation("Recette");
+                });
+
             modelBuilder.Entity("NutriVie.Models.Recette", b =>
                 {
                     b.HasOne("NutriVie.Models.Categorie", "Categorie")
@@ -254,9 +693,19 @@ namespace NutriVie.Migrations
                     b.Navigation("Categorie");
                 });
 
+            modelBuilder.Entity("NutriVie.Models.Aliment", b =>
+                {
+                    b.Navigation("AlimentRecette");
+                });
+
             modelBuilder.Entity("NutriVie.Models.Categorie", b =>
                 {
                     b.Navigation("Recette");
+                });
+
+            modelBuilder.Entity("NutriVie.Models.Recette", b =>
+                {
+                    b.Navigation("AlimentRecette");
                 });
 #pragma warning restore 612, 618
         }
