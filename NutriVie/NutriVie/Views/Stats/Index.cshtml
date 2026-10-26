@@ -10,7 +10,7 @@
     <div class="row">
       
             
-                    <p>Le nombre de recettes avec 3 aliments: @Model.NbRecettesTroisAliments</p>
+                    <p>Le nombre de recettes avec 3 aliments: <strong> @Model.NbRecettesTroisAliments</strong></p>
                     
                 
         
@@ -18,12 +18,11 @@
        
     
             
-                        <p> L'aliment le plus calorique: @Model.AlimentPlusCalorique.CaloriesPour100g</p>
+                        <p> L'aliment le plus calorique: <strong>@Model.AlimentPlusCalorique.Nom</strong></p>
         
-            <div class="card h-100">
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">⏱ Les 4 recettes les plus rapides</h5>
-                </div>
+            <div>
+                
+                    <h5 class="mb-0">La liste des 4 recettes qui ont le plus court temps total (prépartion et cuisson) en affichant le nom et le temps total</h5>
                 <div class="card-body">
                     <table class="table table-hover mb-0">
                         <thead class="thead-light">
@@ -46,8 +45,8 @@
             </div>
 
         
-        <div class="col-md-5 mb-4">
-                    <p> Le nomre de calories de la recette francaise la moins calorique @Model.CaloriesRecetteFrancaiseMoinsCalorique.ToString("F1")</p>
+        <div>
+                    <p> Le nombre de calories de la recette francaise la moins calorique <strong>@Model.CaloriesRecetteFrancaiseMoinsCalorique.ToString("F2")</strong></p>
         </div>
     </div>
 </div>

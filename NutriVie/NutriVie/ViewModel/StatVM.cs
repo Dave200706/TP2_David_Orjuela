@@ -7,7 +7,7 @@ namespace NutriVie.ViewModels
         public int NbRecettesTroisAliments { get; set; }
         public AlimentPlusCaloriqueVM AlimentPlusCalorique { get; set; }
         public List<RecetteCourteVM> Top4RecettesCourtes { get; set; }
-        public double CaloriesRecetteFrancaiseMoinsCalorique { get; set; } 
+        public double CaloriesRecetteFrancaiseMoinsCalorique { get; set; }
     }
 
     public class AlimentPlusCaloriqueVM
