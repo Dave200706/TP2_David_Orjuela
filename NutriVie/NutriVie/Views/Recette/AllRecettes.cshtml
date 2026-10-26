@@ -1,0 +1,30 @@
+﻿@model IEnumerable<NutriVie.ViewModel.RecetteCategorieVM>
+
+@{
+    ViewData["Title"] = "Recettes";
+}
+
+<h1>Recettes</h1>
+
+<div class="accordion" id="accordionRecettes">
+    @{ int index = 0; }
+    @foreach (var catVM in Model)
+    {
+        var headingId = "heading" + index;
+        var collapseId = "collapse" + index;
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="@headingId">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@collapseId" aria-expanded="false" aria-controls="@collapseId">
+                    @catVM.NomCategorie
+                </button>
+            </h2>
+            <div id="@collapseId" class="accordion-collapse collapse" aria-labelledby="@headingId" data-bs-parent="#accordionRecettes">
+                <div class="accordion-body">
+                    <partial name="RecetteCategorie" model="catVM" />
+                </div>
+            </div>
+        </div>
+        index++;
+    }
+</div>

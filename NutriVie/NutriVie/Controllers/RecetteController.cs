@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NutriVie.Models;
 using NutriVie.Models.NutriVieEF;
+using NutriVie.ViewModel;
 
 public class RecetteController : Controller
 {
@@ -182,5 +183,30 @@ public class RecetteController : Controller
     private bool RecetteExists(int? id)
     {
         return _context.Recettes.Any(e => e.Id == id);
+    }
+    public IActionResult Accordeon()
+    {
+
+        var model = _context.Categories
+        .Include(c => c.Recette)
+            .ThenInclude(r => r.AlimentRecette)
+        .Select(c => new RecetteCategorieVM
+        {
+            NomCategorie = c.Nom,
+            Recettes = c.Recette.Select(r => new RecetteInfoVM
+            {
+                Nom = r.Nom,
+                NombreIngredients = r.AlimentRecette.Count,
+                TempsTotal = r.TempsPreparation + r.TempsCuisson,
+                Statut = (r.TempsPreparation + r.TempsCuisson) > 90
+                    ? "Recette de longue durée"
+                    : (r.TempsPreparation + r.TempsCuisson) >= 50
+                        ? "Recette de durée moyenne"
+                        : "Recette de courte durée"
+            }).ToList()
+        })
+        .ToList();
+
+        return View("AllRecettes", model);
     }
 }

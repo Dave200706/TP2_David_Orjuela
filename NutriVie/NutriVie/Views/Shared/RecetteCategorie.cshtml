@@ -1,0 +1,25 @@
+﻿@model NutriVie.ViewModel.RecetteCategorieVM
+
+@if (Model.Recettes != null && Model.Recettes.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom de la recette</th>
+                <th>Nombre d'ingrédients</th>
+                <th>Temps total (min)</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recetteVM in Model.Recettes)
+            {
+                <partial name="RecetteInfo" model="recetteVM" />
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Aucune recette pour cette catégorie.</p>
+}

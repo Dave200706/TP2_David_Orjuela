@@ -1,0 +1,21 @@
+﻿@model NutriVie.ViewModel.RecetteInfoVM
+
+<tr>
+    <td>@Model.Nom</td>
+    <td>@Model.NombreIngredients</td>
+    <td>@Model.TempsTotal</td>
+    <td>
+        @if (Model.Statut == "Recette de longue durée")
+        {
+            <span class="text-danger">@Model.Statut</span>
+        }
+        else if (Model.Statut == "Recette de durée moyenne")
+        {
+            <span class="text-warning">@Model.Statut</span>
+        }
+        else
+        {
+            <span class="text-success">@Model.Statut</span>
+        }
+    </td>
+</tr>
